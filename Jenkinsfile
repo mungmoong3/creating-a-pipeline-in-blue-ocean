@@ -8,13 +8,19 @@ pipeline {
       }
     }
 
-    stage('Test') {
-      agent any
-      environment {
-        CI = 'true'
+    stage('Deploy') {
+      when {
+        beforeAgent true
+        branch 'master'
+      }
+      options {
+        timeout(time: 30, unit: 'SECONDS')
+      }
+      input {
+        message 'Should we continue?'
       }
       steps {
-        sh './jenkins/scripts/test.sh'
+        echo 'Continuing with deployment'
       }
     }
 
