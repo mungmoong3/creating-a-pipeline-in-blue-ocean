@@ -4,7 +4,7 @@ pipeline {
     stage('Build') {
       agent any
       steps {
-        sh 'npm install'
+        sh 'echo "hello"'
       }
     }
 
@@ -21,6 +21,7 @@ pipeline {
       }
       steps {
         echo 'Continuing with deployment'
+        input(message: 'Ok?', submitter: 'sre')
       }
     }
 
